@@ -1,0 +1,7 @@
+.git
+.svn
+.hg
+.*
+CVS
+cache
+/mnt/daten/Downloads/Filme/

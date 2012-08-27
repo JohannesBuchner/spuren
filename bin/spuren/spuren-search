@@ -1,0 +1,7 @@
+#!/bin/bash
+
+DIR=~/.local/share/spuren
+query="$1"
+gunzip < $DIR/db.gz | grep -iE "$query[^\t]*" 
+
+

@@ -1,0 +1,9 @@
+*~
+*.la
+*.lo
+*.in
+*.m4
+*.rej
+*.part
+*.pyc
+*.torrent

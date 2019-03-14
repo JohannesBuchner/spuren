@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-# This file is a part of gnome-pass-search-provider.
+# This file is a part of gnome-spuren-search-provider.
 #
-# gnome-pass-search-provider is free software: you can redistribute it and/or modify
+# gnome-spuren-search-provider is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# gnome-pass-search-provider is distributed in the hope that it will be useful,
+# gnome-spuren-search-provider is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
@@ -24,6 +24,8 @@
 # which itself was based on fedmsg-notify
 # Copyright (C) 2012 Red Hat, Inc.
 # Author: Luke Macken <lmacken@redhat.com>
+# This project was based on gnome-shell-pass-search
+# Copyright (C) 2019 Johannes Buchner
 
 import os, sys
 import re

@@ -1,0 +1,7 @@
+[Unit]
+Description=Spuren search for GNOME Shell
+
+[Service]
+Type=dbus
+BusName=org.gnome.Spuren.SearchProvider
+ExecStart=/usr/lib/gnome-spuren-search-provider/gnome-spuren-search-provider.py

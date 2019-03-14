@@ -1,0 +1,4 @@
+[D-BUS Service]
+Name=org.gnome.Spuren.SearchProvider
+Exec=/usr/lib/gnome-spuren-search-provider/gnome-spuren-search-provider.py
+SystemdService=org.gnome.Spuren.SearchProvider.service

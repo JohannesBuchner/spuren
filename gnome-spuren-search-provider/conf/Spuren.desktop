@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Categories=GNOME;Search;
-Icon=password-manager
+Icon=system-search
 Name=Spuren
 Comment=GNOME Shell search provider for pass
 Terminal=false

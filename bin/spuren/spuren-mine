@@ -7,9 +7,6 @@ mkdir -p $DIR
 ionice -c3 -p $$ >/dev/null 2>/dev/null
 renice +20 $$ >/dev/null 2>/dev/null
 
-## backup old db
-# [ -e db.gz ] && mv db.gz db.gz.old
-
 args=(-not -type d)
 while IFS= read -r pattern; do 
 	args+=(-not -path "*/$pattern")
@@ -22,6 +19,6 @@ done < $DIR/skipfilenames
 for dir in $(sed 's, = .*,,g' $DIR/dirs)
 do
 	find "$dir" "${args[@]}" -printf '%s\t%H\t%P\n'
-done | gzip > $DIR/db.gz
+done | gzip > $DIR/db.next.gz && mv $DIR/db.next.gz $DIR/db.gz
 
 

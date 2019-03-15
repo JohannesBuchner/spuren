@@ -15,15 +15,20 @@ e.g. ~/Documents/private/house/bill.pdf will be found by the search terms "house
 Installing
 ------------------
 
-* Copy the bin folder to a directory you want the executable to live.
-* The configuration goes into ~/.local/share/spuren/
-* You should adapt the files there: which directories to index, which directories and files to skip.
+1. Copy the bin/spuren folder to a directory you want the executable to live (~/.local/bin/ or /usr/bin/).
+2. Make sure that directory is added to the $PATH.
+3. The configuration goes into ~/.local/share/spuren/
+4. You should adapt the files there: which directories to index, which directories and files to skip.
 
 ------------------
 Usage
 ------------------
 
-* On the shell: You can run the shell scripts spuren-mine to mine, and spuren-search to search.
+* To index, run on the shell::
+
+  $ spuren-mine
+
+* To search on the shell: run spuren-search <my keyword>.
 * GNOME Desktop environments: See gnome-spuren-search-provider/ folder for GNOME integration.
 * Other Desktop environments:
    * Run spuren-trayicon which launches the tray icon. The tray icon also allows you to (re-)mine the database (right-click).

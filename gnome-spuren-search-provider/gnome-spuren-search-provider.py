@@ -30,6 +30,7 @@
 import os, sys
 import re
 import gzip
+import codecs
 import traceback
 import subprocess
 import dbus
@@ -38,7 +39,10 @@ import dbus.service
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, GLib
-import codecs
+
+icon_file = ". GThemedIcon application-x-executable"
+icon_copy = ". GThemedIcon edit-copy"
+icon_folder = ". GThemedIcon folder"
 
 # Convenience shorthand for declaring dbus interface methods.
 # s.b.n. -> search_bus_name
@@ -98,7 +102,14 @@ class SpurenService(dbus.service.Object):
 
     @dbus.service.method(in_signature='as', out_signature='aa{sv}', **sbn)
     def GetResultMetas(self, ids):
-        return [dict(id=id, name=id, gicon="search") for id in ids]
+        def geticon(id):
+            if id.startswith('folder'):
+                return icon_folder
+            elif id.startswith('copy'):
+                return icon_copy
+            else:
+                return icon_file
+        return [dict(id=id, name=id, gicon=geticon(id)) for id in ids]
 
     @dbus.service.method(in_signature='asas', out_signature='as', **sbn)
     def GetSubsearchResultSet(self, previous_results, new_terms):
@@ -143,16 +154,6 @@ class SpurenService(dbus.service.Object):
         else:
             results = ['%s %s/%s' % (action, path, filename) for path, filename in filtered_store]
         return results
-
-    def send_password_to_native_clipboard(self, base_args, name):
-        pass_cmd = subprocess.run(base_args + ['-c', name])
-        if pass_cmd.returncode:
-            self.notify('Failed to copy password!', error=True)
-        elif 'otp' in base_args:
-            self.notify('Copied OTP password to clipboard:',
-                        body=f'<b>{name}</b>')
-        else:
-            self.notify('Copied password to clipboard:', body=f'<b>{name}</b>')
 
     def send_to_clipboard(self, text):
         #print("copying to clipboard")

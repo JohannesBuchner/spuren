@@ -18,3 +18,5 @@ install -Dm 0644 conf/Spuren.desktop "${DATADIR}"/applications/org.gnome.Spuren.
 # DBus configuration
 install -Dm 0644 conf/org.gnome.Spuren.SearchProvider.service.dbus "${DATADIR}"/dbus-1/services/org.gnome.Spuren.SearchProvider.service
 install -Dm 0644 conf/org.gnome.Spuren.SearchProvider.service.systemd "${LIBDIR}"/systemd/user/org.gnome.Spuren.SearchProvider.service
+
+echo "Installation complete! Restart GNOME shell now, with Alt+F2, r, return"

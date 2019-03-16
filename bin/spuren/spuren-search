@@ -1,4 +1,5 @@
 #!/bin/bash
+# Search the database for a term (first argument, can be regex)
 
 DIR=~/.local/share/spuren
 query="$1"

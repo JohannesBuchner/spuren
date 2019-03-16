@@ -4,12 +4,27 @@ Spuren desktop search engine
 
 Spuren is a desktop search engine. It finds files by name and containing folder.
 
-Spuren consists of a tray icon for search, and 3 shell scripts that do the mining and searching of the database.
-Standard linux tools are used for this as they are extremely fast. GNOME shell integration was recently added.
+-------------
+Philosophy
+-------------
 
-Although no file content is indexed, spuren is extremely helpful because it tags each file by the folder it is contained in:
-e.g. ~/Documents/private/house/bill.pdf will be found by the search terms "house pdf".
+Spuren is minimalistic.
 
+Early search tools just search the entire filesystem (including system files like programs, configuration files, documentation) by filename (find, locate+updatedb).
+Later, desktop search engines (Beagle, Tracker, recoll, NEPOMUK) offered to search the user directory using content indexing (find files by content), or with attached semantic metadata information. Metadata like tags overcame the rigid tree structures, because many files can be filed into multiple categories. However, mining file content can take substantial CPU&IO resources, and metadata need to be maintained.
+
+Spuren realises that you already maintain a form of file tags: The folder structure a file lies in. *Each file is tagged by the names of its parent folder*. If you already maintain meaningful directory structures, spuren will work well for you.
+
+For example, Documents/house/bills/2019.pdf will be given the tags "house", ".pdf", "bills", "2019". A search for "bills" will return this file, together with Documents/travels/bills/Frankfurt.xls. This solves the problem of choosing the directory structure {as {house,travels}/{bills,maps} or {bills,maps}/{house,travels} - each layer indicates a different semantic division, yet in meaning they are equivalent to spuren.
+
+----------
+Features
+----------
+
+* 2 shell scripts for the mining and searching of the database (20 lines of code total!)
+* extremely fast because standard linux tools are used
+* Tray icon + cross-platform search UI
+* GNOME shell integration (see gnome-spuren-search-provider)
 
 ------------------
 Installing
@@ -47,19 +62,18 @@ Comparison to other engines
   * Tracker's database needs a lot of disk space. Spuren's database only stores the filenames in a gzipped text file.
   * Tracker can use a lot of CPU, and IO at random times. Spuren indexes quickly (with "find"), when you want it.
 
+* NEPOMUK, Beagle, recoll vs Spuren: see Tracker vs. Spuren arguments
+* locate/update-db vs Spuren: 
+
+  * Both are based on Unix tools
+  * locate is shell-only: Spuren provide shell-based searches and a graphical UI and GNOME integration
+  * Spuren does not need root access or special dealing with non-user-visible files.
+
 * GNOME search vs. Spuren
 
   * Both provide GNOME Shell search
   * GNOME search cannot be easily configured what folders and files to index, or not to index. Spuren allows regular expressions
   * Spuren allows launching results, opening containing folder, and copying to clipboard
-
-* NEPOMUK vs Spuren: see Tracker vs. Spuren arguments
-* Beagle vs Spuren: see Tracker vs. Spuren arguments
-* locate/update-db vs Spuren: 
-
-  * Both are based on Unix tools
-  * locate is shell-only: Spuren provide shell-based searches and a graphical UI and GNOME integration
-  * Spuren does not need root access.
 
 ------------------
 Licence

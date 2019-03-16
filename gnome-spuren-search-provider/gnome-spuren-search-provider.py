@@ -37,6 +37,7 @@ import dbus
 import dbus.glib
 import dbus.service
 import gi
+import itertools
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, GLib
 
@@ -69,6 +70,7 @@ class SpurenService(dbus.service.Object):
         dbus.service.Object.__init__(self, bus_name, self._object_path)
         
     def load(self):
+        # reads in spuren database
         self.store = []
         for line in gzip.open(self.store_path, mode='rt', encoding='latin1'):
             parts = line.strip().split("\t", maxsplit=2)
@@ -84,7 +86,7 @@ class SpurenService(dbus.service.Object):
             cmd = str(id)
             action, path = cmd.split(' ', maxsplit=1)
             if action == 'copy':
-                self.send_to_clipboard(cmd)
+                self.send_to_clipboard(path)
             elif action == 'folder':
                 self.launch(os.path.dirname(path))
             elif action == 'launch':
@@ -144,15 +146,14 @@ class SpurenService(dbus.service.Object):
         else:
             base_store = self.store
 
-        filtered_store = [(path, filename) for path, filename in base_store 
-            if all((term in filename.lower()) for term in terms)]
-        self.last_terms = terms
-        self.last_results = filtered_store
+        filtered_store = itertools.islice(((path, filename) for path, filename in base_store 
+            if all((term in filename.lower()) for term in terms)), 20)
+        #self.last_terms = terms
+        #self.last_results = filtered_store
         #print("   %d results for (%s)'%s'" % (len(filtered_store), action, terms) )
-        if len(filtered_store) == 0:
+        results = ['%s %s/%s' % (action, path, filename) for path, filename in filtered_store]
+        if len(results) == 0:
             results = ['no results']
-        else:
-            results = ['%s %s/%s' % (action, path, filename) for path, filename in filtered_store]
         return results
 
     def send_to_clipboard(self, text):

@@ -1,4 +1,11 @@
 #!/bin/bash
+# Create the spuren database
+# Finds all files in the directories listed in ~/.local/share/spuren/dirs
+# skipping all folder names listed in ~/.local/share/spuren/skipdirnames
+# and ignores all files listed in ~/.local/share/spuren/skipfilenames
+#
+# New database is stored as gzipped ascii file in ~/.local/share/spuren/db.gz
+# Database format is <filesize>\t<rootdirectory>\t<filename>
 
 DIR=~/.local/share/spuren/
 

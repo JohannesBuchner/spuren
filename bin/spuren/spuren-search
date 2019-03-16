@@ -6,9 +6,9 @@
 DIR=~/.local/share/spuren
 
 # This builds a awk query ala /term1/ && /term2/
-query="BEGIN{IGNORECASE=1} /$1[^\t]*/"; shift
+query="BEGIN{IGNORECASE=1} /[0-9]*\t[^\t]*\t[^\t]*$1[^\t]*/"; shift
 for arg in "$@"; do 
-	query="$query && /$arg[^\t]*/"
+	query="$query && /[0-9]*\t[^\t]*\t[^\t]*$arg[^\t]*/"
 done
 gunzip < $DIR/db.gz | gawk "$query"
 

@@ -1,8 +1,15 @@
 #!/bin/bash
-# Search the database for a term (first argument, can be regex)
+# Search the database by terms (can be regex)
+# Does something similar to:
+# gunzip < $DIR/db.gz | grep -iE "$1[^\t]*" 
 
 DIR=~/.local/share/spuren
-query="$1"
-gunzip < $DIR/db.gz | grep -iE "$query[^\t]*" 
+
+# This builds a awk query ala /term1/ && /term2/
+query="BEGIN{IGNORECASE=1} /$1[^\t]*/"; shift
+for arg in "$@"; do 
+	query="$query && /$arg[^\t]*/"
+done
+gunzip < $DIR/db.gz | gawk "$query"
 
 

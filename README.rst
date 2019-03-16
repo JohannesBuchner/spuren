@@ -10,12 +10,12 @@ Philosophy
 
 Spuren is minimalistic.
 
-Early search tools just search the entire filesystem (including system files like programs, configuration files, documentation) by filename (find, locate+updatedb).
-Later, desktop search engines (Beagle, Tracker, recoll, NEPOMUK) offered to search the user directory using content indexing (find files by content), or with attached semantic metadata information. Metadata like tags overcame the rigid tree structures, because many files can be filed into multiple categories. However, mining file content can take substantial CPU&IO resources, and metadata need to be maintained.
+Simple search tools just search the entire filesystem (including system files like programs, configuration files, documentation) by filename (find, locate+updatedb).
+Later, desktop search engines (Beagle, Tracker, recoll, NEPOMUK) offered to search the user directory using content indexing (find files by content), or with attached semantic metadata information. Metadata like tags overcame the rigid tree structures, because many files can be filed into multiple categories. However, metadata need to be maintained and mining file content can take substantial resources (CPU, IO, disk space).
 
-Spuren realises that you already maintain a form of file tags: The folder structure a file lies in. *Each file is tagged by the names of its parent folder*. If you already maintain meaningful directory structures, spuren will work well for you.
+Spuren realises that you already maintain a form of file tags: The folder structure a file lies in. **Each file is tagged by the names of its parent folder, its extension, and filename**. If you already maintain meaningful directory structures and file names, spuren will work well for you.
 
-For example, Documents/house/bills/2019.pdf will be given the tags "house", ".pdf", "bills", "2019". A search for "bills" will return this file, together with Documents/travels/bills/Frankfurt.xls. This solves the problem of choosing the directory structure {as {house,travels}/{bills,maps} or {bills,maps}/{house,travels} - each layer indicates a different semantic division, yet in meaning they are equivalent to spuren.
+For example, Documents/house/bills/2019.pdf will be given the tags "house .pdf, bills, 2019". A search for "bills" will return this file, together with Documents/travels/bills/Frankfurt.xls. This solves the problem of choosing the directory structure {as {house,travels}/{bills,maps} or {bills,maps}/{house,travels} - each directory layer represent a semantic division, spuren does not care about the order.
 
 ----------
 Features
@@ -60,7 +60,7 @@ Comparison to other engines
 
   * Tracker provides full-text search. Spuren only indexes filenames
   * Tracker's database needs a lot of disk space. Spuren's database only stores the filenames in a gzipped text file.
-  * Tracker can use a lot of CPU, and IO at random times. Spuren indexes quickly (with "find"), when you want it.
+  * Tracker can use a lot of CPU, and IO at random times. Spuren indexes quickly (with "find" on lowest IO&CPU priority), when you want it.
 
 * NEPOMUK, Beagle, recoll vs Spuren: see Tracker vs. Spuren arguments
 * locate/update-db vs Spuren: 
@@ -73,6 +73,7 @@ Comparison to other engines
 
   * Both provide GNOME Shell search
   * GNOME search cannot be easily configured what folders and files to index, or not to index. Spuren allows regular expressions
+  * GNOME search searches on-demand. Spuren looks up in a index database.
   * Spuren allows launching results, opening containing folder, and copying to clipboard
 
 ------------------

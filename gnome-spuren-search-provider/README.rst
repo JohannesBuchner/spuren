@@ -25,7 +25,7 @@ If you need to you can change the installation paths to suit your system::
 How to use
 ------------
 
-1. Press the Win key and enter your search terms.
+1. Press the Win/Super key and enter your search terms.
 2. The file database will be searched for these.
 3. By default, the file will be launched if clicked. 
 4. Append %dir or %path to your search term to open the folder.

@@ -45,10 +45,13 @@ Usage
 
 * To search on the shell::
 
-  $ spuren-search house
-  $ spuren-search house
+  $ spuren-search house bill
+  $ spuren-search organi[sz]ation cv
+
 * GNOME Desktop environments: See gnome-spuren-search-provider/ folder for GNOME integration.
+
 * Other Desktop environments:
+
    * Run spuren-trayicon which launches the tray icon. The tray icon also allows you to (re-)mine the database (right-click).
    * Click the icon for a search box. 
    * Easy keyboard navigation is implemented
